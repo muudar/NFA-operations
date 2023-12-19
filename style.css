@@ -67,3 +67,12 @@ th {
 #output-table td {
   width: 50px;
 }
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+#output-table div {
+  margin-right: 50px;
+}

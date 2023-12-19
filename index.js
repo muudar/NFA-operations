@@ -306,3 +306,80 @@ document.getElementById("alternation-btn").onclick = () => {
   }
   document.getElementById("output-table").appendChild(htmlTable);
 };
+
+function findPaths(adjacencyMatrix) {
+  const numNodes = adjacencyMatrix.length;
+
+  const resultMatrix = Array.from({ length: numNodes }, () =>
+    Array(numNodes).fill(0)
+  );
+
+  for (let i = 0; i < numNodes; i++) {
+    for (let j = 0; j < numNodes; j++) {
+      resultMatrix[i][j] = adjacencyMatrix[i][j];
+    }
+  }
+
+  for (let k = 0; k < numNodes; k++) {
+    for (let i = 0; i < numNodes; i++) {
+      for (let j = 0; j < numNodes; j++) {
+        resultMatrix[i][j] =
+          resultMatrix[i][j] || (resultMatrix[i][k] && resultMatrix[k][j]);
+      }
+    }
+  }
+
+  return resultMatrix;
+}
+
+document.getElementById("closure-btn").onclick = () => {
+  let firstNfaTable = document.getElementById("first-nfa-table");
+  let secondNFATable = document.getElementById("second-nfa-table");
+  for (let i = 0; i < table1.length; i++) {
+    for (let j = 0; j < table1.length; j++) {
+      let text =
+        firstNfaTable.children[i + 1].children[j + 1].children[0].value;
+      table1[i][j] = text.includes("e") ? 1 : 0;
+    }
+  }
+  for (let i = 0; i < table2.length; i++) {
+    for (let j = 0; j < table2.length; j++) {
+      let text =
+        secondNFATable.children[i + 1].children[j + 1].children[0].value;
+      table2[i][j] = text.includes("e") ? 1 : 0;
+    }
+  }
+  const res1 = findPaths(table1);
+  const res2 = findPaths(table2);
+  document.getElementById("output-table").innerHTML = "";
+  let div1 = document.createElement("div");
+  div1.classList.add("flex-col");
+  for (let i = 0; i < res1.length; i++) {
+    let insideDiv = document.createElement("div");
+    let line = "f" + i + " closure: [f" + i;
+    for (let j = 0; j < res1.length; j++) {
+      if (i != j && res1[i][j] == 1) {
+        line += ", f" + j;
+      }
+    }
+    line += "]";
+    insideDiv.textContent = line;
+    div1.appendChild(insideDiv);
+  }
+  let div2 = document.createElement("div");
+  div2.classList.add("flex-col");
+  for (let i = 0; i < res2.length; i++) {
+    let insideDiv = document.createElement("div");
+    let line = "s" + i + " closure: [s" + i;
+    for (let j = 0; j < res2.length; j++) {
+      if (i != j && res2[i][j] == 1) {
+        line += ", f" + j;
+      }
+    }
+    line += "]";
+    insideDiv.textContent = line;
+    div2.appendChild(insideDiv);
+  }
+  document.getElementById("output-table").appendChild(div1);
+  document.getElementById("output-table").appendChild(div2);
+};
