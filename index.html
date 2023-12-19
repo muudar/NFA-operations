@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>NFA Operations</title>
+  </head>
+  <body>
+    <div class="centered col">
+      <h1>NFA-Operation Project</h1>
+      <p>Structure of Programming Logic - 12th Project</p>
+    </div>
+    <div class="upper-part">
+      <div class="first-nfa-input nfa-input">
+        <div>
+          <div>How many states would you like?</div>
+          <input id="first-nfa-number" type="number" />
+          <button id="firstNFAMaking" type="submit">Make NFA</button>
+        </div>
+      </div>
+      <div class="second-nfa-input nfa-input">
+        <div>
+          <div>How many states would you like?</div>
+          <input id="second-nfa-number" type="number" />
+          <button id="secondNFAMaking" type="submit">Make NFA</button>
+        </div>
+      </div>
+    </div>
+    <div class="operations-container">
+      <button id="concatenation-btn">Concatenation</button>
+      <button id="alternation-btn">Alternation</button>
+      <button>Closure</button>
+    </div>
+    <div id="output-table"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
